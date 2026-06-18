@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuildCorp - Business Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark: #0a0e27;
+            --secondary: #1a1f3a;
+            --accent: #00d4ff;
+            --accent2: #ff006e;
+            --light: #f0f0f0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(26, 31, 58, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .cta-nav {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            text-align: center;
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInDown 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: rgba(240, 240, 240, 0.8);
+            margin-bottom: 2.5rem;
+            animation: slideInUp 0.8s ease;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 1s ease;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* Services Section */
+        .services {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(26, 31, 58, 0.8) 0%, rgba(10, 14, 39, 0.8) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-card p {
+            color: rgba(240, 240, 240, 0.7);
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background: rgba(26, 31, 58, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .team-member h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--accent);
+        }
+
+        .team-member .role {
+            color: rgba(240, 240, 240, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 0 2rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .testimonial {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 0, 110, 0.05) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            border-color: var(--accent);
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-text {
+            color: rgba(240, 240, 240, 0.8);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, rgba(10, 14, 39, 0.95) 0%, rgba(26, 31, 58, 0.95) 100%);
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding: 4rem 2rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a, .footer-col p {
+            color: rgba(240, 240, 240, 0.7);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            padding-top: 2rem;
+            color: rgba(240, 240, 240, 0.5);
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">BuildCorp</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#team">Team</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="cta-nav" onclick="alert('Contact form opening...')">Get Started</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Transform Your Business Today</h1>
+        <p>Cutting-edge solutions tailored to your business needs. Trusted by 500+ companies worldwide.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Explore Services</button>
+            <button class="btn-secondary" onclick="alert('Schedule demo')">Schedule Demo</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3>Digital Strategy</h3>
+                <p>Custom digital transformation strategies designed to accelerate your growth and market presence in the digital landscape.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Consulting</h3>
+                <p>Expert consultation from industry veterans with 20+ years of experience in business optimization and growth.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Analytics</h3>
+                <p>Data-driven insights and analytics to make informed decisions and track your business performance metrics.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔐</div>
+                <h3>Security</h3>
+                <p>Enterprise-grade security solutions protecting your data and infrastructure from modern threats.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3>Integration</h3>
+                <p>Seamless integration of existing systems and tools to create a unified, efficient workflow.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎓</div>
+                <h3>Training</h3>
+                <p>Comprehensive training programs to upskill your team and maximize platform adoption.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <h2 class="section-title">Meet Our Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">👔</div>
+                <h4>Alex Johnson</h4>
+                <div class="role">CEO & Founder</div>
+                <p>15+ years in digital transformation</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">💻</div>
+                <h4>Sarah Chen</h4>
+                <div class="role">CTO</div>
+                <p>Cloud architect & tech innovator</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">📈</div>
+                <h4>Mike Rodriguez</h4>
+                <div class="role">Head of Strategy</div>
+                <p>Business growth specialist</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">🎨</div>
+                <h4>Emma Davis</h4>
+                <div class="role">Design Lead</div>
+                <p>UX/UI Design expert</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <h2 class="section-title">What Clients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"BuildCorp transformed our entire digital infrastructure. The team was professional and delivered beyond expectations."</div>
+                <div class="testimonial-author">- John Smith, Tech Startup CEO</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"Exceptional service, outstanding results. They helped us achieve 300% growth in just 6 months."</div>
+                <div class="testimonial-author">- Lisa Wong, E-commerce Director</div>
+            </div>
+            <div class="testimonial">
+                <div class="stars">★★★★★</div>
+                <div class="testimonial-text">"The expertise and dedication of the BuildCorp team is unmatched. Highly recommended!"</div>
+                <div class="testimonial-author">- Robert Martinez, Enterprise Manager</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>About BuildCorp</h4>
+                <p>Leading digital solutions provider transforming businesses worldwide.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="#services">Strategy</a>
+                <a href="#services">Consulting</a>
+                <a href="#services">Analytics</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="#team">Team</a>
+                <a href="#testimonials">Case Studies</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <p>📧 hello@buildcorp.io</p>
+                <p>📱 +1 (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BuildCorp. All rights reserved. | Crafted by RHM__HY</p>
+        </div>
+    </footer>
+</body>
+</html>
